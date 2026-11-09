@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f5f4ef" />
+    <title>Коло — чат наживо</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/socket.io/socket.io.js" defer></script>
+    <script src="/app.js" defer></script>
+</head>
+<body>
+<main class="shell">
+    <header class="topbar">
+        <a class="brand" href="#" aria-label="Коло, головна">
+            <span class="brand-mark"><span></span><span></span><span></span></span>
+            <span>коло<span class="brand-period">.</span></span>
+        </a>
+        <div class="topbar-note"><span class="tiny-spark">✳</span> Простір для розмов</div>
+        <button class="avatar" id="profileAvatar" aria-label="Ваш профіль">Г</button>
+    </header>
+
+    <section class="layout">
+        <aside class="sidebar">
+            <div class="sidebar-intro">
+                <p class="eyebrow">ТВІЙ ПРОСТІР</p>
+                <h1>Говори<br />по-справжньому.</h1>
+                <p class="intro-copy">Невеликий куточок інтернету, де можна просто бути на зв’язку.</p>
+            </div>
+            <div class="room-card active-room">
+                <div class="room-icon">✳</div>
+                <div class="room-label"><strong>Загальна</strong><span>Тут починається розмова</span></div>
+                <span class="room-dot"></span>
+            </div>
+            <div class="sidebar-bottom">
+                <div class="online-card"><span class="online-indicator"></span><span><strong id="onlineCount">0</strong> зараз онлайн</span></div>
+                <div class="sidebar-caption"><span class="lock-icon">◌</span> Твої повідомлення бачать учасники кімнати</div>
+            </div>
+        </aside>
+
+        <section class="chat-card" aria-label="Загальний чат">
+            <header class="chat-header">
+                <div class="room-heading"><div class="heading-icon">✳</div><div><h2>Загальна</h2><p><span class="live-dot"></span> <span id="roomStatus">Підключаємось…</span></p></div></div>
+                <button class="more-button" aria-label="Інформація про чат" title="Загальний чат">•••</button>
+            </header>
+            <div class="welcome-banner"><span class="welcome-icon">✦</span><div><strong>Раді бачити тебе тут!</strong><p>Представся та починай розмову з усіма в кімнаті.</p></div></div>
+            <div class="messages" id="messages" aria-live="polite" aria-label="Повідомлення"></div>
+            <div class="typing" id="typing" aria-live="polite"></div>
+            <form class="composer" id="messageForm">
+                <button class="attach-button" type="button" aria-label="Додати емодзі" title="Додати усмішку" id="emojiButton">☺</button>
+                <input id="messageInput" type="text" maxlength="1000" placeholder="Напиши щось хороше…" autocomplete="off" aria-label="Текст повідомлення" />
+                <span class="enter-hint">Enter ↵</span>
+                <button class="send-button" type="submit" aria-label="Надіслати повідомлення"><span>↗</span></button>
+            </form>
+            <div class="composer-foot"><span>Будь добрим. Це завжди пасує.</span><span id="connectionLabel">Socket.io</span></div>
+        </section>
+    </section>
+    <footer class="page-footer"><span>Зроблено для живих розмов</span><span>● &nbsp;Без зайвого шуму</span></footer>
+</main>
+
+<dialog id="nameDialog" class="name-dialog">
+    <form method="dialog" id="nameForm">
+        <div class="dialog-mark">✳</div><p class="eyebrow">ПЕРШ НІЖ ПОЧАТИ</p><h2>Як тебе звати?</h2><p class="dialog-copy">Ім’я побачать інші учасники чату.</p>
+        <label for="nameInput">Твоє ім’я</label><input id="nameInput" maxlength="24" placeholder="Наприклад, Оля" autocomplete="name" required />
+        <button class="join-button" type="submit">Увійти в чат <span>↗</span></button>
+    </form>
+</dialog>
+<div class="toast" id="toast" role="status"></div>
+</body>
+</html>
